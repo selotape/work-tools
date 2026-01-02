@@ -1,5 +1,6 @@
 #!/bin/bash
-# Adds scripts directory to PATH so git can find git-* commands
+# Installs git worktree helper commands as global git aliases
+# Works on Windows (Git Bash), macOS, and Linux
 # Run once after cloning
 
 set -e
@@ -7,31 +8,17 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCRIPTS_PATH="$SCRIPT_DIR/scripts"
 
-# Determine which shell config file to use
-if [ -f "$HOME/.bashrc" ]; then
-    SHELL_CONFIG="$HOME/.bashrc"
-elif [ -f "$HOME/.bash_profile" ]; then
-    SHELL_CONFIG="$HOME/.bash_profile"
-else
-    SHELL_CONFIG="$HOME/.bashrc"
-fi
+echo "Installing git worktree helpers as global aliases..."
 
-# Check if already in PATH
-if echo "$PATH" | grep -q "$SCRIPTS_PATH"; then
-    echo "work-tools scripts already in PATH"
-else
-    echo "Adding work-tools/scripts to PATH..."
-    echo "" >> "$SHELL_CONFIG"
-    echo "# work-tools git commands" >> "$SHELL_CONFIG"
-    echo "export PATH=\"\$PATH:$SCRIPTS_PATH\"" >> "$SHELL_CONFIG"
-    echo ""
-    echo "Added to $SHELL_CONFIG"
-    echo "Run: source $SHELL_CONFIG (or restart terminal)"
-fi
+# Use git config --global to add aliases (cross-platform)
+git config --global alias.start-worktree "!bash $SCRIPTS_PATH/git-start-worktree"
+git config --global alias.finish-worktree "!bash $SCRIPTS_PATH/git-finish-worktree"
 
 echo ""
-echo "Git commands available (after PATH update):"
+echo "Installed! Git commands now available:"
 echo "  git start-worktree <branch-name>  - Create a worktree for a task"
 echo "  git finish-worktree               - Merge and cleanup (run from worktree)"
 echo ""
-echo "To uninstall: remove the work-tools lines from $SHELL_CONFIG"
+echo "To uninstall:"
+echo "  git config --global --unset alias.start-worktree"
+echo "  git config --global --unset alias.finish-worktree"

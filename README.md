@@ -9,11 +9,12 @@ Portable scripts and tools for development workflows. Designed to work across al
    git clone https://github.com/selotape/work-tools.git ~/work-tools
    ```
 
-2. Add scripts to PATH (run once):
+2. Install git aliases (run once):
    ```bash
    ./install-git-aliases.sh
-   source ~/.bashrc  # or restart terminal
    ```
+
+Works on Windows (Git Bash), macOS, and Linux. No shell restart needed.
 
 ## Available Tools
 
@@ -41,7 +42,11 @@ git finish-worktree
 
 ## How It Works
 
-Git automatically finds executables named `git-*` in your PATH and exposes them as subcommands. The install script adds `work-tools/scripts` to your PATH, making all `git-*` scripts available as git commands.
+The install script adds global git aliases pointing to the bash scripts. This approach:
+- Works cross-platform (Windows, macOS, Linux)
+- No PATH modification needed
+- No shell restart required
+- Easy to uninstall: `git config --global --unset alias.start-worktree`
 
 ## Contributing
 
