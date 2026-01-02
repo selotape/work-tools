@@ -9,9 +9,10 @@ Portable scripts and tools for development workflows. Designed to work across al
    git clone https://github.com/selotape/work-tools.git ~/work-tools
    ```
 
-2. Add git aliases (run once):
+2. Add scripts to PATH (run once):
    ```bash
    ./install-git-aliases.sh
+   source ~/.bashrc  # or restart terminal
    ```
 
 ## Available Tools
@@ -38,9 +39,13 @@ git finish-worktree
 - Edit the scripts if your directory structure differs
 - Scripts are designed for multi-agent workflows (multiple Claude agents working simultaneously)
 
+## How It Works
+
+Git automatically finds executables named `git-*` in your PATH and exposes them as subcommands. The install script adds `work-tools/scripts` to your PATH, making all `git-*` scripts available as git commands.
+
 ## Contributing
 
 When adding new scripts:
-1. Add the script to `scripts/`
-2. Update `install-git-aliases.sh` if it should be a git alias
+1. Add the script to `scripts/` named `git-<command>` (no extension needed)
+2. Make it executable: `chmod +x scripts/git-<command>`
 3. Document in this README

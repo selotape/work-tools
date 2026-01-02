@@ -9,12 +9,15 @@ This is a collection of portable development scripts and tools. Keep scripts:
 - Well-documented (comments + README)
 - Cross-platform where possible (bash works on Windows Git Bash, macOS, Linux)
 
-## Adding New Scripts
+## Adding New Git Commands
 
-1. Create script in `scripts/` directory
-2. Make it executable: `chmod +x scripts/my-script.sh`
-3. If it should be a git alias, add to `install-git-aliases.sh`
-4. Document usage in README.md
+Git automatically finds executables named `git-*` in PATH. To add a new git command:
+
+1. Create script in `scripts/` named `git-<command>` (no extension)
+2. Make it executable: `chmod +x scripts/git-<command>`
+3. Document usage in README.md
+
+Example: `scripts/git-sync` becomes available as `git sync`
 
 ## Code Style
 
